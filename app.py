@@ -21,8 +21,8 @@ PRODUCTS = [
     "Коробочное Страхование"
 ]
 
-SHEET_NAME = "sales_competition"
-WORKSHEET = "data"
+SHEET_NAME = "sales_competitions"
+WORKSHEET = "data1"
 
 # -----------------------
 # Подключение к Google Sheets
