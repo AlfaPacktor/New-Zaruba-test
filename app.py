@@ -69,6 +69,7 @@ def update_value(employee, product, value, operation):
         else:
             new_value = current - value
         cell_row = index + 2  # +2 из-за заголовка
+        new_value = int(new_value)
         sheet.update_cell(cell_row, 3, new_value)
 
 # -----------------------
