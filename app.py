@@ -38,7 +38,7 @@ def connect_sheet():
         scopes=scope
     )
     client = gspread.authorize(creds)
-    sheet = client.open(SHEET_NAME).worksheet(WORKSHEET)
+    sheet = client.open_by_key(1BQrUxvUsewpOfgOU7Mzr8I668oadQdn6o51xzJESuJs).worksheet(WORKSHEET)
     return sheet
 
 # -----------------------
