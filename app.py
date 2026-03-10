@@ -18,7 +18,7 @@ EMPLOYEES = [
 
 PRODUCTS = [
     "Кредит Наличными",
-    "Коробочное Страхование"
+    "НСДП"
 ]
 
 SHEET_NAME = "sales_competition"
