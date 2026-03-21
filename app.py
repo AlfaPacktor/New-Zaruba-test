@@ -52,7 +52,13 @@ def load_data():
     data = sheet.get_all_records()
     if not data:
         return pd.DataFrame(columns=["employee", "product", "value"])
-    return pd.DataFrame(data)
+    
+    df = pd.DataFrame(data)
+    
+    # Приводим value к числу
+    df["value"] = pd.to_numeric(df["value"], errors="coerce").fillna(0)
+    
+    return df
 
 # -----------------------
 # Обновление данных
@@ -61,18 +67,20 @@ def update_value(employee, product, value, operation):
     sheet = connect_sheet()
     df = load_data()
     row = df[(df["employee"] == employee) & (df["product"] == product)]
+
     if row.empty:
         new_value = value if operation == "+" else -value
-        sheet.append_row([employee, product, new_value])
+        sheet.append_row([employee, product, int(new_value)])
     else:
         index = row.index[0]
-        current = row.iloc[0]["value"]
+        current = float(row.iloc[0]["value"])
+
         if operation == "+":
             new_value = current + value
         else:
             new_value = current - value
-        cell_row = index + 2  # +2 из-за заголовка
-        new_value = int(new_value)
+
+        cell_row = index + 2
         sheet.update_cell(cell_row, 3, int(new_value))
 
 # -----------------------
