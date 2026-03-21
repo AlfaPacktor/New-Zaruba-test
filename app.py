@@ -79,6 +79,7 @@ def input_section():
     st.header("Ввод данных")
     employee = st.selectbox("Выберите сотрудника", EMPLOYEES)
     entries = {}
+
     for product in PRODUCTS:
         col1, col2 = st.columns([3, 1])
         with col1:
@@ -86,21 +87,23 @@ def input_section():
         with col2:
             operation = st.radio("Операция", ["+", "-"], horizontal=True, key=f"op_{product}")
         entries[product] = (value, operation)
+
+    # КНОПКИ
     col1, col2 = st.columns(2)
 
-with col1:
-    if st.button("Принять данные"):
-        for product, (value, operation) in entries.items():
-            if value > 0:
-                update_value(employee, product, value, operation)
-        st.success("Данные обновлены")
-        st.rerun()
+    with col1:
+        if st.button("Принять данные"):
+            for product, (value, operation) in entries.items():
+                if value > 0:
+                    update_value(employee, product, value, operation)
+            st.success("Данные обновлены")
+            st.rerun()
 
-with col2:
-    st.link_button(
-        "Заруба Хантеров",
-        "https://hunterfight.streamlit.app/"
-    )
+    with col2:
+        st.link_button(
+            "Заруба Хантеров",
+            "https://hunterfight.streamlit.app/"
+        )
 
 # -----------------------
 # Рейтинг сотрудников
