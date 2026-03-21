@@ -94,7 +94,8 @@ def input_section():
     for product in PRODUCTS:
         col1, col2 = st.columns([3, 1])
         with col1:
-            value = st.number_input(product, min_value=0, step=1, key=f"value_{product}")
+            value_str = st.text_input(product, value="", key=f"value_{product}")
+            value = int(value_str) if value_str.isdigit() else 0
         with col2:
             operation = st.radio("Операция", ["+", "-"], horizontal=True, key=f"op_{product}")
         entries[product] = (value, operation)
