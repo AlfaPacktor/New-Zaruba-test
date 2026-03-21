@@ -86,12 +86,21 @@ def input_section():
         with col2:
             operation = st.radio("Операция", ["+", "-"], horizontal=True, key=f"op_{product}")
         entries[product] = (value, operation)
-    if st.button("Принять данные"):
-        for product, (value, operation) in entries.items():
-            if value > 0:
-                update_value(employee, product, value, operation)
-        st.success("Данные обновлены")
-        st.rerun()
+    col1, col2 = st.columns(2)
+
+with col1:
+    if st.button("Принять данные"):
+        for product, (value, operation) in entries.items():
+            if value > 0:
+                update_value(employee, product, value, operation)
+        st.success("Данные обновлены")
+        st.rerun()
+
+with col2:
+    st.link_button(
+        "Заруба Хантеров",
+        "https://hunterfight.streamlit.app/"
+    )
 
 # -----------------------
 # Рейтинг сотрудников
@@ -121,6 +130,24 @@ def leaderboard():
 # -----------------------
 def main():
     st.set_page_config(page_title="Конкурс продаж", layout="wide")
+
+    st.markdown("""
+    <style>
+    a[data-testid="stLinkButton"] {
+        background-color: #1f1f1f;
+        color: white !important;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    a[data-testid="stLinkButton"]:hover {
+        background-color: #333333;
+        color: white !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     st.title("🏆 Конкурс продаж")
     input_section()
     st.divider()
